@@ -11,9 +11,13 @@ RSpec.describe 'コメント投稿', type: :system do
     fill_in 'Email', with: @tweet.user.email
     fill_in 'Password', with: @tweet.user.password
     find('input[name="commit"]').click
+    expect(current_path).to eq(root_path)
+
     visit tweet_path(@tweet)
     fill_in 'comment_text', with: @comment
-    find('input[name="commit"]').click
+    expect{
+      find('input[name="commit"]').click
+    }.to change { Comment.count }.by(1)
     expect(current_path).to eq tweet_path(@tweet)
     expect(page).to have_content @comment
   end

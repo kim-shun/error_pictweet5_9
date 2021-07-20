@@ -14,5 +14,7 @@ RSpec.describe 'コメント投稿', type: :system do
     visit tweet_path(@tweet)
     fill_in 'comment_text', with: @comment
     find('input[name="commit"]').click
+    expect(current_path).to eq tweet_path(@tweet)
+    expect(page).to have_content @comment
   end
 end

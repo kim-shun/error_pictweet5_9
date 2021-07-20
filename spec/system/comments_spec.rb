@@ -10,7 +10,8 @@ RSpec.describe 'コメント投稿', type: :system do
     visit new_user_session_path
     fill_in 'Email', with: @tweet.user.email
     fill_in 'Password', with: @tweet.user.password
-    binding.pry
     find('input[name="commit"]').click
+    binding.pry
+    visit tweet_path(@tweet)
   end
 end
